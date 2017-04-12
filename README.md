@@ -216,6 +216,20 @@ Some things to note:
 
 > All properties defined in the module jar file will **over-write** any existing properties that are set.
 
+The `rouetmaster.properties` file deployed with this module is as follows:
+
+
+
+
+
+```
+rest./module/example/=synapticloop.nanohttpd.module.example.ExampleModuleServant
+
+```
+
+
+
+
 
 
 <a name="documentr_heading_9"></a>
@@ -292,8 +306,6 @@ you will see something along the lines of:
 ```
 Hello from the example module, this page was brought to you by the letter 'H'
 ```
-
-
 
 
 
