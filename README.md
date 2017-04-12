@@ -146,9 +146,9 @@ repositories {
 //
 
 dependencies {
-	runtime 'synapticloop:routemaster:2.0.0'
+	runtime 'synapticloop:routemaster:2.1.0'
 
-	compile 'synapticloop:routemaster:2.0.0'
+	compile 'synapticloop:routemaster:2.1.0'
 }
 
 //
@@ -434,12 +434,12 @@ You will also need to download the following dependencies:
 
 ### compile dependencies
 
-  - `synapticloop:routemaster:2.0.0`: (It may be available on one of: [bintray](https://bintray.com/synapticloop/maven/routemaster/2.0.0/view#files/synapticloop/routemaster/2.0.0) [mvn central](http://search.maven.org/#artifactdetails|synapticloop|routemaster|2.0.0|jar))
+  - `synapticloop:routemaster:2.1.0`: (It may be available on one of: [bintray](https://bintray.com/synapticloop/maven/routemaster/2.1.0/view#files/synapticloop/routemaster/2.1.0) [mvn central](http://search.maven.org/#artifactdetails|synapticloop|routemaster|2.1.0|jar))
 
 
 ### runtime dependencies
 
-  - `synapticloop:routemaster:2.0.0`: (It may be available on one of: [bintray](https://bintray.com/synapticloop/maven/routemaster/2.0.0/view#files/synapticloop/routemaster/2.0.0) [mvn central](http://search.maven.org/#artifactdetails|synapticloop|routemaster|2.0.0|jar))
+  - `synapticloop:routemaster:2.1.0`: (It may be available on one of: [bintray](https://bintray.com/synapticloop/maven/routemaster/2.1.0/view#files/synapticloop/routemaster/2.1.0) [mvn central](http://search.maven.org/#artifactdetails|synapticloop|routemaster|2.1.0|jar))
 
 **NOTE:** You may need to download any dependencies of the above dependencies in turn (i.e. the transitive dependencies)
 

@@ -44,9 +44,9 @@ repositories {
 //
 
 dependencies {
-	runtime 'synapticloop:routemaster:2.0.0'
+	runtime 'synapticloop:routemaster:2.1.0'
 
-	compile 'synapticloop:routemaster:2.0.0'
+	compile 'synapticloop:routemaster:2.1.0'
 }
 
 //
