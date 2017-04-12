@@ -4,12 +4,9 @@ plugins {
 	id "maven"
 	id "maven-publish"
 
+	id "com.github.ben-manes.versions" version "0.13.0"
 	id 'net.saliman.cobertura' version '2.2.6'
-	id "org.sonarqube" version "1.0"
-	id "com.jfrog.bintray" version "1.4"
 	id 'co.riiid.gradle' version '0.4.2'
-
-	id "com.github.johnrengelman.shadow" version "1.2.4"
 
 	id "synapticloop.copyrightr" version "1.1.2"
 	id "synapticloop.documentr" version "2.9.0"
@@ -17,6 +14,9 @@ plugins {
 
 version = '1.0.0'
 
+//
+// ensure that you change the following values
+//
 group = 'synapticloop'
 archivesBaseName = 'routemaster-module-example'
 description = """example module for the routemaster"""
@@ -30,81 +30,38 @@ repositories {
 	jcenter()
 }
 
+//
+// ensure that the dependencies are up-to-date, you can do this by running
+//
+//    gradle dependencyUpdates
+//
+// or as a shortcut (provided there are no clashes)
+//
+//    gradle dU
+//
+// this functionality is provided by the plugin:
+//    id "com.github.ben-manes.versions" version "0.13.0"
+//
+
 dependencies {
 	runtime 'synapticloop:routemaster:2.0.0'
 
 	compile 'synapticloop:routemaster:2.0.0'
-
-	testCompile 'junit:junit:4.11'
-	testCompile 'org.mockito:mockito-all:1.10.19'
 }
 
-jar {
-	manifest {
-		attributes(
-			"Main-Class": "synapticloop.nanohttpd.RouteMasterServer",
-			"Implementation-Version": version
-		)
-	}
-}
-
-cobertura {
-	coverageFormats = [ 'html', 'xml']
-}
-
-test {
-	include '**/*Test.class' 
-	maxParallelForks = 5
-	forkEvery = 50 
-}
-
-
-ant.version = version
-ant.buildDir = buildDir
-
-def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
-def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
-
-tasks.withType(Javadoc) {
-	options.links(javaApiUrl, groovyApiUrl)
-	exclude '**/fi/**'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	from 'build/docs/javadoc'
-}
-
-task sourcesJar(type: Jar) {
-	from sourceSets.main.allSource
-	classifier = 'sources'
-}
-
-/*
- * Publishing to various sources
- */
-
-publishing {
-	publications {
-		Synapticloop(MavenPublication) {
-			from components.java
-			artifact sourcesJar
-			artifact javadocJar
-
-			groupId 'synapticloop'
-			artifactId 'routemaster-module-example'
-
-			pom.withXml {
-				configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
-					asNode().dependencies[0].dependency.find {
-						it.artifactId[0].text() == dep.moduleName &&
-								it.groupId[0].text() == dep.moduleGroup
-					}.scope[0].value = 'compile'
-				}
-			}
-		}
-	}
-}
+//
+// This will upload the file to github releases section and can be accomplished 
+// by running 
+//
+//    gradle githubRelease
+//
+// or as a shortcut (provided there are no clashes)
+//
+//    gradle gR
+//
+// you __MUST__ provide the following environment key:
+//    - GITHUB_TOKEN
+//
 
 github {
 	owner = group
@@ -117,19 +74,4 @@ github {
 	assets = [
 		'build/libs/' + archivesBaseName + '-' + version + '.jar',
 	]
-}
-
-bintray {
-	user = System.getenv('BINTRAY_USER')
-	key = System.getenv('BINTRAY_PASSWORD')
-
-	publications = [ 'Synapticloop' ]
-
-	publish = true
-
-	pkg {
-		repo = 'maven'
-		name = 'routemaster-module-example'
-	}
-
 }
