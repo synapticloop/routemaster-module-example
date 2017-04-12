@@ -22,7 +22,7 @@ The structure of the folder is as follows:
 
 ## Configuration
 
-### `build.gradle`
+### File: `build.gradle`
 
 This is the main build file and contains everything to build the module.  It can be executed by typing the following:
 
