@@ -25,6 +25,8 @@
 		{ "type":"file", "value":"settings.gradle" },
 		{ "type":"markdown", "value":"\n```\n" },
 
+		{ "type":"file", "value":"src/docs/readme-02.md" },
+
 		{ "type":"inbuilt", "value":"gradle-build" },
 		{ "type":"inbuilt", "value":"gradle-test" },
 

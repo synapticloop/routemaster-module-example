@@ -30,15 +30,17 @@
  - [Table of Contents](#documentr_heading_1)
  - [Creating a new module](#documentr_heading_2)
    - [Setup](#documentr_heading_3)
- - [Building the Package](#documentr_heading_6)
-   - [*NIX/Mac OS X](#documentr_heading_7)
-   - [Windows](#documentr_heading_8)
- - [Running the Tests](#documentr_heading_9)
-   - [*NIX/Mac OS X](#documentr_heading_10)
-   - [Windows](#documentr_heading_11)
-   - [Dependencies - Gradle](#documentr_heading_12)
-   - [Dependencies - Maven](#documentr_heading_13)
-   - [Dependencies - Downloads](#documentr_heading_14)
+   - [Configuration](#documentr_heading_4)
+   - [Code](#documentr_heading_7)
+ - [Building the Package](#documentr_heading_8)
+   - [*NIX/Mac OS X](#documentr_heading_9)
+   - [Windows](#documentr_heading_10)
+ - [Running the Tests](#documentr_heading_11)
+   - [*NIX/Mac OS X](#documentr_heading_12)
+   - [Windows](#documentr_heading_13)
+   - [Dependencies - Gradle](#documentr_heading_14)
+   - [Dependencies - Maven](#documentr_heading_15)
+   - [Dependencies - Downloads](#documentr_heading_16)
 
 
 # Module Support
@@ -70,7 +72,12 @@ The structure of the folder is as follows:
  - `settings.gradle` (the settings file for gradle)
  - `src` (the source files directory)
 
-The following files are of interest:
+
+
+
+<a name="documentr_heading_4"></a>
+
+## Configuration <sup><sup>[top](documentr_top)</sup></sup>
 
 ### `build.gradle`
 
@@ -183,16 +190,28 @@ rootProject.name = 'routemaster-module-example'
 
 
 
+so that the `rootProject.name` value matches your project name.
 
 
 
-<a name="documentr_heading_6"></a>
+
+<a name="documentr_heading_7"></a>
+
+## Code <sup><sup>[top](documentr_top)</sup></sup>
+
+All the code resides in the `src/main/java` directory, with resources in the `src/main/resources` directory.
+
+
+
+
+
+<a name="documentr_heading_8"></a>
 
 # Building the Package <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_7"></a>
+<a name="documentr_heading_9"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -203,7 +222,7 @@ From the root of the project, simply run
 
 
 
-<a name="documentr_heading_8"></a>
+<a name="documentr_heading_10"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -216,13 +235,13 @@ Note that this may also run tests (if applicable see the Testing notes)
 
 
 
-<a name="documentr_heading_9"></a>
+<a name="documentr_heading_11"></a>
 
 # Running the Tests <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_10"></a>
+<a name="documentr_heading_12"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -236,7 +255,7 @@ if you do not have gradle installed, try:
 
 
 
-<a name="documentr_heading_11"></a>
+<a name="documentr_heading_13"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -253,7 +272,7 @@ The `--info` switch will also output logging for the tests
 
 
 
-<a name="documentr_heading_12"></a>
+<a name="documentr_heading_14"></a>
 
 ## Dependencies - Gradle <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -285,7 +304,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_13"></a>
+<a name="documentr_heading_15"></a>
 
 ## Dependencies - Maven <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -304,7 +323,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_14"></a>
+<a name="documentr_heading_16"></a>
 
 ## Dependencies - Downloads <sup><sup>[top](documentr_top)</sup></sup>
 
