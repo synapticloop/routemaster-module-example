@@ -3,6 +3,12 @@
 This is an example module that offers additional, modular support for [synapticloop routemaster](https://github.com/synapticloop/routemaster).
 
 Routemaster modules can be automatically loaded from the `modules` directory that 
+can automatically provide:
+
+ - Handlers
+ - Configuration options
+ - RESTful routes
+ - static routes
 
 # Creating a new module
 
