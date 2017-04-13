@@ -19,34 +19,62 @@
 
 
 
-
 <a name="documentr_heading_1"></a>
+
+# Quick overview <sup><sup>[top](documentr_top)</sup></sup>
+
+This module provides an extension point for the [routemaster](https://github.com/synapticloop/routemaster) server which can be 
+automatically loaded and registered by placing it in the `modules/` directory alongside
+the `routemaster-server.jar`.  The module provides all dependencies and 
+configuration required to fully load and execute the module.
+
+Download from [https://github.com/synapticloop/routemaster-module-example/releases](https://github.com/synapticloop/routemaster-module-example/releases)
+
+Within the module, at the root of the jar file will be a file named `routemaster-module-example.properties` 
+which determines the configuration for the module.  The configuration file may be viewed here:
+
+`src/main/resources/routemaster-module-example.properties`
+
+Furthermore, the in-built configuration can be over-ridden by placing a file 
+named `routemaster-module-example.properties` in the `modules` directory along side the jar 
+file which will take precedence when searching for configuration.
+
+The file format and layout is as per the `routemaster.properties` file for the 
+routemaster server.
+
+
+
+
+
+<a name="documentr_heading_2"></a>
 
 # Table of Contents <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
  - [routemaster-module-example](#documentr_heading_0)
- - [Table of Contents](#documentr_heading_1)
- - [Creating a new module](#documentr_heading_2)
-   - [Setup](#documentr_heading_3)
-   - [Configuration](#documentr_heading_4)
-   - [Including dependencies in the module](#documentr_heading_6)
-   - [Code](#documentr_heading_8)
- - [Deploying modules](#documentr_heading_10)
-   - [Step 1](#documentr_heading_11)
-   - [Step 2](#documentr_heading_12)
-   - [Step 3](#documentr_heading_13)
- - [Running the server](#documentr_heading_14)
- - [Building the Package](#documentr_heading_15)
-   - [*NIX/Mac OS X](#documentr_heading_16)
-   - [Windows](#documentr_heading_17)
- - [Running the Tests](#documentr_heading_18)
-   - [*NIX/Mac OS X](#documentr_heading_19)
-   - [Windows](#documentr_heading_20)
-   - [Dependencies - Gradle](#documentr_heading_21)
-   - [Dependencies - Maven](#documentr_heading_22)
-   - [Dependencies - Downloads](#documentr_heading_23)
+ - [Quick overview](#documentr_heading_1)
+ - [Table of Contents](#documentr_heading_2)
+ - [Creating a new module](#documentr_heading_3)
+   - [Setup](#documentr_heading_4)
+   - [Configuration](#documentr_heading_5)
+   - [Including dependencies in the module](#documentr_heading_7)
+   - [Code](#documentr_heading_9)
+ - [Deploying modules](#documentr_heading_11)
+   - [Step 1](#documentr_heading_12)
+   - [Step 2](#documentr_heading_13)
+   - [Step 3](#documentr_heading_14)
+ - [Running the server](#documentr_heading_15)
+ - [Generating the default documentation](#documentr_heading_16)
+ - [Building the Package](#documentr_heading_17)
+   - [*NIX/Mac OS X](#documentr_heading_18)
+   - [Windows](#documentr_heading_19)
+ - [Running the Tests](#documentr_heading_20)
+   - [*NIX/Mac OS X](#documentr_heading_21)
+   - [Windows](#documentr_heading_22)
+   - [Dependencies - Gradle](#documentr_heading_23)
+   - [Dependencies - Maven](#documentr_heading_24)
+   - [Dependencies - Downloads](#documentr_heading_25)
 
 
 # Module Support
@@ -63,13 +91,13 @@ can automatically provide:
 
 
 
-<a name="documentr_heading_2"></a>
+<a name="documentr_heading_3"></a>
 
 # Creating a new module <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_3"></a>
+<a name="documentr_heading_4"></a>
 
 ## Setup <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -87,13 +115,14 @@ The structure of the folder is as follows:
 
 
 
-<a name="documentr_heading_4"></a>
+<a name="documentr_heading_5"></a>
 
 ## Configuration <sup><sup>[top](documentr_top)</sup></sup>
 
 ### File: `build.gradle`
 
-This is the main build file and contains everything to build the module.  It can be executed by typing the following:
+This is the main build file and contains everything to build (and bundle - if 
+required) the module.  It can be executed by typing the following:
 
 `gradle build`
 
@@ -101,7 +130,7 @@ If you are on windows:
 
 `gradle.bat build`
 
-The file contents are:
+The `build.gradle` file contents are:
 
 
 
@@ -214,7 +243,7 @@ github {
 
 
 
-<a name="documentr_heading_6"></a>
+<a name="documentr_heading_7"></a>
 
 ## Including dependencies in the module <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -245,45 +274,39 @@ so that the `rootProject.name` value matches your project name.
 
 
 
-<a name="documentr_heading_8"></a>
+<a name="documentr_heading_9"></a>
 
 ## Code <sup><sup>[top](documentr_top)</sup></sup>
 
 All the code resides in the `src/main/java` directory, with resources in the `src/main/resources` directory.
 
-### File: `src/main/resources/routemaster.properties`
+### File: `src/main/resources/{archivesBaseName}.properties`
 
-You **MUST** have a `routemaster.properties` file deployed with every module jar or it will not be activated.
+You **MUST** have a properties file deployed with every module jar or it will not 
+be activated.  The name of the properties file is the module name (without any version 
+number - (e.g. `{archivesBaseName}.properties` - in this example it is 
+`routemaster-module-example.properties`
 
-The `routemaster.properties` file has the same standard layout as the default properties file, and may map options, handlers and routes (both RESTful and not).
+The keys and values in the properties file are the same as the default 
+`routemaster.properties` file.  This file has the same standard layout as the 
+default properties file, and may map options, handlers and routes 
+(both RESTful and not).
 
 Some things to note:
 
 > All properties defined in the module jar file will **over-write** any existing properties that are set.
 
-The `rouetmaster.properties` file deployed with this module is as follows:
 
 
 
 
-
-```
-rest./module/example/=synapticloop.nanohttpd.module.example.ExampleModuleServant
-
-```
-
-
-
-
-
-
-<a name="documentr_heading_10"></a>
+<a name="documentr_heading_11"></a>
 
 # Deploying modules <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_11"></a>
+<a name="documentr_heading_12"></a>
 
 ## Step 1 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -293,7 +316,7 @@ To deploy the built module, ensure that you have downloaded the latest routemast
 
 
 
-<a name="documentr_heading_12"></a>
+<a name="documentr_heading_13"></a>
 
 ## Step 2 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -311,7 +334,7 @@ Create a `modules` directory which is in the same directory that the downloaded 
 
 
 
-<a name="documentr_heading_13"></a>
+<a name="documentr_heading_14"></a>
 
 ## Step 3 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -329,7 +352,7 @@ Place the module (or multiple modules) into the `modules` directory so that it w
 
 
 
-<a name="documentr_heading_14"></a>
+<a name="documentr_heading_15"></a>
 
 # Running the server <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -356,14 +379,32 @@ Hello from the example module, this page was brought to you by the letter 'H'
 
 
 
+<a name="documentr_heading_16"></a>
 
-<a name="documentr_heading_15"></a>
+# Generating the default documentation <sup><sup>[top](documentr_top)</sup></sup>
+
+Simply run:
+
+
+
+```
+gradle --no-daemon documentr
+```
+
+
+
+Or you can simply generate your own `README.md` file.
+
+
+
+
+<a name="documentr_heading_17"></a>
 
 # Building the Package <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_16"></a>
+<a name="documentr_heading_18"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -374,7 +415,7 @@ From the root of the project, simply run
 
 
 
-<a name="documentr_heading_17"></a>
+<a name="documentr_heading_19"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -387,13 +428,13 @@ Note that this may also run tests (if applicable see the Testing notes)
 
 
 
-<a name="documentr_heading_18"></a>
+<a name="documentr_heading_20"></a>
 
 # Running the Tests <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_19"></a>
+<a name="documentr_heading_21"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -407,7 +448,7 @@ if you do not have gradle installed, try:
 
 
 
-<a name="documentr_heading_20"></a>
+<a name="documentr_heading_22"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -424,7 +465,7 @@ The `--info` switch will also output logging for the tests
 
 
 
-<a name="documentr_heading_21"></a>
+<a name="documentr_heading_23"></a>
 
 ## Dependencies - Gradle <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -456,7 +497,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_22"></a>
+<a name="documentr_heading_24"></a>
 
 ## Dependencies - Maven <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -475,7 +516,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_23"></a>
+<a name="documentr_heading_25"></a>
 
 ## Dependencies - Downloads <sup><sup>[top](documentr_top)</sup></sup>
 

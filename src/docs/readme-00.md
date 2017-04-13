@@ -30,7 +30,8 @@ The structure of the folder is as follows:
 
 ### File: `build.gradle`
 
-This is the main build file and contains everything to build the module.  It can be executed by typing the following:
+This is the main build file and contains everything to build (and bundle - if 
+required) the module.  It can be executed by typing the following:
 
 `gradle build`
 
@@ -38,5 +39,5 @@ If you are on windows:
 
 `gradle.bat build`
 
-The file contents are:
+The `build.gradle` file contents are:
 

@@ -1,0 +1,22 @@
+{\n}
+# Quick overview{\n}
+{\n}
+This module provides an extension point for the [routemaster](https://github.com/synapticloop/routemaster) server which can be {\n}
+automatically loaded and registered by placing it in the `modules/` directory alongside{\n}
+the `routemaster-server.jar`.  The module provides all dependencies and {\n}
+configuration required to fully load and execute the module.{\n}
+{\n}
+Download from [https://github.com/synapticloop/{archivesBaseName}/releases](https://github.com/synapticloop/{archivesBaseName}/releases){\n}
+{\n}
+Within the module, at the root of the jar file will be a file named `{archivesBaseName}.properties` {\n}
+which determines the configuration for the module.  The configuration file may be viewed here:{\n}
+{\n}
+`src/main/resources/{archivesBaseName}.properties`{\n}
+{\n}
+Furthermore, the in-built configuration can be over-ridden by placing a file {\n}
+named `{archivesBaseName}.properties` in the `modules` directory along side the jar {\n}
+file which will take precedence when searching for configuration.{\n}
+{\n}
+The file format and layout is as per the `routemaster.properties` file for the {\n}
+routemaster server.{\n}
+{\n}

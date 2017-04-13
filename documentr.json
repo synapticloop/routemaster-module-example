@@ -6,6 +6,8 @@
 		{ "type":"inbuilt", "value":"project-name" },
 		{ "type":"inbuilt", "value":"project-description" },
 
+		{ "type":"template", "value":"src/docs/overview.templar" },
+
 		{ "type": "markup", "value": "\n\n# Table of Contents\n\n" },
 
 		{ "type": "toc", "value": "2" },
@@ -26,12 +28,6 @@
 		{ "type":"markdown", "value":"\n```\n" },
 
 		{ "type":"file", "value":"src/docs/readme-02.md" },
-
-		{ "type":"markdown", "value":"\n```\n" },
-		{ "type":"file", "value":"src/main/resources/routemaster.properties" },
-		{ "type":"markdown", "value":"\n```\n" },
-
-		{ "type":"file", "value":"src/docs/readme-03.md" },
 
 		{ "type":"inbuilt", "value":"gradle-build" },
 		{ "type":"inbuilt", "value":"gradle-test" },
