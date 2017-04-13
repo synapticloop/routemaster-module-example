@@ -8,11 +8,13 @@ plugins {
 	id 'net.saliman.cobertura' version '2.2.6'
 	id 'co.riiid.gradle' version '0.4.2'
 
+	id "com.github.johnrengelman.shadow" version "1.2.4"
+
 	id "synapticloop.copyrightr" version "1.1.2"
 	id "synapticloop.documentr" version "2.9.0"
 }
 
-version = '1.0.0'
+version = '1.1.0'
 
 //
 // ensure that you change the following values
@@ -28,6 +30,14 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 	jcenter()
+}
+
+//
+// We create a configuration here which is used to run the shadow jar
+//
+
+configurations {
+	shadow
 }
 
 //
@@ -47,6 +57,19 @@ dependencies {
 	runtime 'synapticloop:routemaster:2.1.0'
 
 	compile 'synapticloop:routemaster:2.1.0'
+
+	// if you need to include any dependencies, then you __MUST__ add them to the
+	// 'shadow configuration, e.g. uncomment the following line to include 'templar'
+	// shadow 'synapticloop:templar:1.4.4'
+}
+
+// the following is the shadow jar plugin configuration which ultimately collects
+// all of the dependencies together and puts them into the same jar file for
+// deployment
+
+shadowJar {
+	classifier = ''
+	configurations = [project.configurations.shadow]
 }
 
 //

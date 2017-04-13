@@ -31,21 +31,22 @@
  - [Creating a new module](#documentr_heading_2)
    - [Setup](#documentr_heading_3)
    - [Configuration](#documentr_heading_4)
-   - [Code](#documentr_heading_7)
- - [Deploying modules](#documentr_heading_9)
-   - [Step 1](#documentr_heading_10)
-   - [Step 2](#documentr_heading_11)
-   - [Step 3](#documentr_heading_12)
- - [Running the server](#documentr_heading_13)
- - [Building the Package](#documentr_heading_14)
-   - [*NIX/Mac OS X](#documentr_heading_15)
-   - [Windows](#documentr_heading_16)
- - [Running the Tests](#documentr_heading_17)
-   - [*NIX/Mac OS X](#documentr_heading_18)
-   - [Windows](#documentr_heading_19)
-   - [Dependencies - Gradle](#documentr_heading_20)
-   - [Dependencies - Maven](#documentr_heading_21)
-   - [Dependencies - Downloads](#documentr_heading_22)
+   - [Including dependencies in the module](#documentr_heading_6)
+   - [Code](#documentr_heading_8)
+ - [Deploying modules](#documentr_heading_10)
+   - [Step 1](#documentr_heading_11)
+   - [Step 2](#documentr_heading_12)
+   - [Step 3](#documentr_heading_13)
+ - [Running the server](#documentr_heading_14)
+ - [Building the Package](#documentr_heading_15)
+   - [*NIX/Mac OS X](#documentr_heading_16)
+   - [Windows](#documentr_heading_17)
+ - [Running the Tests](#documentr_heading_18)
+   - [*NIX/Mac OS X](#documentr_heading_19)
+   - [Windows](#documentr_heading_20)
+   - [Dependencies - Gradle](#documentr_heading_21)
+   - [Dependencies - Maven](#documentr_heading_22)
+   - [Dependencies - Downloads](#documentr_heading_23)
 
 
 # Module Support
@@ -110,11 +111,13 @@ plugins {
 	id 'net.saliman.cobertura' version '2.2.6'
 	id 'co.riiid.gradle' version '0.4.2'
 
+	id "com.github.johnrengelman.shadow" version "1.2.4"
+
 	id "synapticloop.copyrightr" version "1.1.2"
 	id "synapticloop.documentr" version "2.9.0"
 }
 
-version = '1.0.0'
+version = '1.1.0'
 
 //
 // ensure that you change the following values
@@ -130,6 +133,14 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 	jcenter()
+}
+
+//
+// We create a configuration here which is used to run the shadow jar
+//
+
+configurations {
+	shadow
 }
 
 //
@@ -149,6 +160,19 @@ dependencies {
 	runtime 'synapticloop:routemaster:2.1.0'
 
 	compile 'synapticloop:routemaster:2.1.0'
+
+	// if you need to include any dependencies, then you __MUST__ add them to the
+	// 'shadow configuration, e.g. uncomment the following line to include 'templar'
+	// shadow 'synapticloop:templar:1.4.4'
+}
+
+// the following is the shadow jar plugin configuration which ultimately collects
+// all of the dependencies together and puts them into the same jar file for
+// deployment
+
+shadowJar {
+	classifier = ''
+	configurations = [project.configurations.shadow]
 }
 
 //
@@ -181,6 +205,19 @@ github {
 ```
 
 
+
+
+
+<a name="documentr_heading_6"></a>
+
+## Including dependencies in the module <sup><sup>[top](documentr_top)</sup></sup>
+
+Within the `build.gradle` file a `shadow` configuration is defined.  Any dependencies 
+that you wish to include in the final module **MUST** be listed here.  
+
+See the `configurations`, `dependencies` and the `shadowJat` sections in the 
+`build.gradle` file above.
+
 ### File: `settings.gradle`
 
 You will also want to change the `settings.gradle` file:
@@ -200,7 +237,7 @@ so that the `rootProject.name` value matches your project name.
 
 
 
-<a name="documentr_heading_7"></a>
+<a name="documentr_heading_8"></a>
 
 ## Code <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -232,13 +269,13 @@ rest./module/example/=synapticloop.nanohttpd.module.example.ExampleModuleServant
 
 
 
-<a name="documentr_heading_9"></a>
+<a name="documentr_heading_10"></a>
 
 # Deploying modules <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_10"></a>
+<a name="documentr_heading_11"></a>
 
 ## Step 1 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -248,7 +285,7 @@ To deploy the built module, ensure that you have downloaded the latest routemast
 
 
 
-<a name="documentr_heading_11"></a>
+<a name="documentr_heading_12"></a>
 
 ## Step 2 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -266,7 +303,7 @@ Create a `modules` directory which is in the same directory that the downloaded 
 
 
 
-<a name="documentr_heading_12"></a>
+<a name="documentr_heading_13"></a>
 
 ## Step 3 <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -284,7 +321,7 @@ Place the module (or multiple modules) into the `modules` directory so that it w
 
 
 
-<a name="documentr_heading_13"></a>
+<a name="documentr_heading_14"></a>
 
 # Running the server <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -312,13 +349,13 @@ Hello from the example module, this page was brought to you by the letter 'H'
 
 
 
-<a name="documentr_heading_14"></a>
+<a name="documentr_heading_15"></a>
 
 # Building the Package <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_15"></a>
+<a name="documentr_heading_16"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -329,7 +366,7 @@ From the root of the project, simply run
 
 
 
-<a name="documentr_heading_16"></a>
+<a name="documentr_heading_17"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -342,13 +379,13 @@ Note that this may also run tests (if applicable see the Testing notes)
 
 
 
-<a name="documentr_heading_17"></a>
+<a name="documentr_heading_18"></a>
 
 # Running the Tests <sup><sup>[top](documentr_top)</sup></sup>
 
 
 
-<a name="documentr_heading_18"></a>
+<a name="documentr_heading_19"></a>
 
 ## *NIX/Mac OS X <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -362,7 +399,7 @@ if you do not have gradle installed, try:
 
 
 
-<a name="documentr_heading_19"></a>
+<a name="documentr_heading_20"></a>
 
 ## Windows <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -379,7 +416,7 @@ The `--info` switch will also output logging for the tests
 
 
 
-<a name="documentr_heading_20"></a>
+<a name="documentr_heading_21"></a>
 
 ## Dependencies - Gradle <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -387,9 +424,9 @@ The `--info` switch will also output logging for the tests
 
 ```
 dependencies {
-	runtime(group: 'synapticloop', name: 'routemaster-module-example', version: '1.0.0', ext: 'jar')
+	runtime(group: 'synapticloop', name: 'routemaster-module-example', version: '1.1.0', ext: 'jar')
 
-	compile(group: 'synapticloop', name: 'routemaster-module-example', version: '1.0.0', ext: 'jar')
+	compile(group: 'synapticloop', name: 'routemaster-module-example', version: '1.1.0', ext: 'jar')
 }
 ```
 
@@ -401,9 +438,9 @@ or, more simply for versions of gradle greater than 2.1
 
 ```
 dependencies {
-	runtime 'synapticloop:routemaster-module-example:1.0.0'
+	runtime 'synapticloop:routemaster-module-example:1.1.0'
 
-	compile 'synapticloop:routemaster-module-example:1.0.0'
+	compile 'synapticloop:routemaster-module-example:1.1.0'
 }
 ```
 
@@ -411,7 +448,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_21"></a>
+<a name="documentr_heading_22"></a>
 
 ## Dependencies - Maven <sup><sup>[top](documentr_top)</sup></sup>
 
@@ -421,7 +458,7 @@ dependencies {
 <dependency>
 	<groupId>synapticloop</groupId>
 	<artifactId>routemaster-module-example</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<type>jar</type>
 </dependency>
 ```
@@ -430,7 +467,7 @@ dependencies {
 
 
 
-<a name="documentr_heading_22"></a>
+<a name="documentr_heading_23"></a>
 
 ## Dependencies - Downloads <sup><sup>[top](documentr_top)</sup></sup>
 
